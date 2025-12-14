@@ -25,7 +25,7 @@ class Request extends Model
             $existingRequest = self::where('student_id', $request->student_id)
                 ->whereIn('status', ['pending', 'accepted'])
                 ->exists();
-            
+
             if ($existingRequest) {
                 throw new \Exception('الطالب لديه بالفعل طلب قيد الانتظار أو تم قبوله.');
             }
@@ -37,7 +37,7 @@ class Request extends Model
                     ->where('id', '!=', $request->id)
                     ->whereIn('status', ['pending', 'accepted'])
                     ->exists();
-                
+
                 if ($existingRequest) {
                     throw new \Exception('الطالب لديه بالفعل طلب قيد الانتظار أو تم قبوله.');
                 }

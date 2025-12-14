@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('housing_units', function (Blueprint $table) {
             $table->id();
             $table->string('unit_name', 100);
-            $table->enum('unit_gender', ['male','female']);
+            $table->enum('unit_gender', ['male', 'female']);
             $table->integer('max_room_capacity');
             $table->integer('total_rooms')->default(0);
             $table->integer('occupied_rooms')->default(0);

@@ -13,7 +13,7 @@ return new class extends Migration
             $table->string('national_id', 20)->unique();
             $table->string('phone', 20)->unique();
             $table->string('password');
-            $table->enum('role', ['admin','student'])->default('student');
+            $table->enum('role', ['admin', 'student'])->default('student');
             $table->string('first_name', 50);
             $table->string('last_name', 50);
             $table->string('father_name', 50);
