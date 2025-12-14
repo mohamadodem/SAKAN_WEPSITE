@@ -13,7 +13,7 @@ class AdminController extends Controller
 {
     public function dashboard()
     {
-        $pendingRequests = HousingRequest::with(['student.user', 'student.faculty', 'room.housingUnit'])->where('status', 'pending')->get();
+        $pendingRequests = HousingRequest::with(['student.user', 'student.facult', 'room.housingUnit'])->where('status', 'pending')->get();
         $acceptedRequests = HousingRequest::with(['student.user', 'student.faculty', 'room.housingUnit'])->where('status', 'accepted')->get();
         $rejectedRequests = HousingRequest::with(['student.user', 'student.faculty', 'room.housingUnit'])->where('status', 'rejected')->get();
         
