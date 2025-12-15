@@ -5,16 +5,7 @@
 @section('content')
 <div class="card" style="max-width: 400px; margin: 0 auto;">
     <h2 style="text-align: center; margin-bottom: 1.5rem;">تسجيل الدخول</h2>
-{{--     
-    @if($errors->any())
-        <div class="alert alert-danger">
-            <ul style="margin: 0; padding-right: 1rem;">
-                @foreach($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif --}}
+
     
     <form method="POST" action="{{ route('login') }}">
         @csrf
