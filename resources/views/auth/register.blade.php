@@ -8,12 +8,8 @@
     
     @if($errors->any())
         <div class="alert alert-danger">
-            <strong>يرجى تصحيح الأخطاء التالية:</strong>
-            <ul style="margin: 0; padding-right: 1rem;">
-                @foreach($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+            <strong>يرجى تصحيح الأخطاء :</strong>
+            
         </div>
     @endif
     
