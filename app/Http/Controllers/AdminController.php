@@ -20,9 +20,9 @@ class AdminController extends Controller
         return view('admin.dashboard', compact('pendingRequests', 'acceptedRequests', 'rejectedRequests'));
     }
 
-    public function showAcceptForm($id)
+    public function showAcceptUnit($id)
     {
-        // عرض نموذج اختيار الوحدة
+
         $request = HousingRequest::with('student')->findOrFail($id);
         
         // فقط الوحدات المناسبة لجنس الطالب
@@ -33,20 +33,20 @@ class AdminController extends Controller
     
     public function showRoomsForm(Request $request, $id)
     {
-        // استلام بيانات النموذج
-        $requestData = $request->validate([
+      //بيعمل تحقق عالبيانات يلي رح توصلو ازا مو زابطة برجعوا عالصفحة يلي قبلو 
+      $requestData = $request->validate([
             'housing_unit_id' => 'required|exists:housing_units,id'
         ]);
         
         $housingRequest = HousingRequest::with('student')->findOrFail($id);
         $unit = HousingUnit::findOrFail($requestData['housing_unit_id']);
         
-        // التحقق من أن الوحدة مناسبة لجنس الطالب
+        //مشان يشوف ازا الجنس تبع الوحدة نفس الجنس تبع الطالب
         if ($unit->unit_gender !== $housingRequest->student->gender) {
             return back()->with('error', 'هذه الوحدة غير مناسبة لجنس الطالب');
         }
         
-        // جلب الغرف المتاحة
+        //بجيب كل الغرف المتاحة بالوحدة
         $rooms = Room::where('housing_unit_id', $unit->id)
             ->where('occupied', '<', $unit->max_room_capacity)
             ->get();
@@ -56,6 +56,7 @@ class AdminController extends Controller
     
     public function acceptRequest(Request $request, $id)
     {
+
         $validated = $request->validate([
             'room_id' => 'required|exists:rooms,id',
             'housing_unit_id' => 'required|exists:housing_units,id'
@@ -78,8 +79,8 @@ class AdminController extends Controller
         // تحديث عداد الغرفة
         $room->increment('occupied');
         
-        // إذا كانت الغرفة أصبحت مشغولة لأول مرة
-        if ($room->occupied == 1) {
+        //اذا الغرفة تعبّت
+        if ($room->occupied == $room->housingUnit->max_room_capacity) {
             $room->housingUnit->increment('occupied_rooms');
         }
         

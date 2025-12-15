@@ -17,26 +17,30 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        $request->validate([
-            'national_id' => 'required|string',
-            'password'    => 'required|string',
-        ], [
-            'national_id.required' => 'رقم الهوية مطلوب',
-            'password.required'    => 'كلمة المرور مطلوبة',
-        ]);
+       $validator = Validator::make($request->all(), [
+        'national_id' => 'required|string',
+        'password' => 'required|string',
+    ], [
+        'national_id.required' => 'رقم الهوية مطلوب',
+        'password.required' => 'كلمة المرور مطلوبة',
+    ]);
+
+    if ($validator->fails()) {
+        return back()->withErrors($validator)->withInput();
+    }
 
         $user = User::where('national_id', $request->national_id)->first();
 
         if (! $user) {
             return back()->withErrors([
                 'national_id' => 'رقم الهوية غير مسجل في النظام.',
-            ])->withInput($request->only('national_id'));
+            ])->withInput();
         }
 
         if (! Hash::check($request->password, $user->password)) {
             return back()->withErrors([
                 'password' => 'كلمة المرور غير صحيحة.',
-            ])->withInput($request->only('national_id'));
+            ])->withInput();
         }
 
         Auth::login($user);
@@ -95,7 +99,6 @@ class AuthController extends Controller
             'national_id' => $request->national_id,
             'phone'       => $request->phone,
             'password'    => Hash::make($request->password),
-            'role'        => 'student',
             'first_name'  => $request->first_name,
             'last_name'   => $request->last_name,
             'father_name' => $request->father_name,

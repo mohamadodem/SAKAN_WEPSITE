@@ -36,7 +36,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     
     // قبول الطلب - خطوتين
-    Route::get('/admin/request/{id}/accept', [AdminController::class, 'showAcceptForm'])->name('admin.request.accept.form');
+    Route::get('/admin/request/{id}/accept', [AdminController::class, 'showAcceptUnit'])->name('admin.request.accept.form');
     Route::post('/admin/request/{id}/rooms', [AdminController::class, 'showRoomsForm'])->name('admin.show.rooms');
     Route::post('/admin/request/{id}/accept', [AdminController::class, 'acceptRequest'])->name('admin.request.accept');
     
