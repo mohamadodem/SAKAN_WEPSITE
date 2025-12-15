@@ -4,11 +4,25 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\AdminController;
+use Illuminate\Support\Facades\Auth;
 
 // الصفحة الرئيسية
-Route::get('/', function () {
+
+   Route::get('/', function () {
+
+    if (Auth::check()) {
+
+        if (Auth::user()->role === 'admin') {
+            return redirect()->route('admin.dashboard');
+        }
+
+        return redirect()->route('student.dashboard');
+    }
+
     return view('welcome');
 });
+
+
 
 // المصادقة
 Route::middleware('guest')->group(function () {
