@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Middleware;
 
 use Closure;
@@ -10,18 +9,16 @@ class CheckRole
 {
     public function handle(Request $request, Closure $next, $roles)
     {
-        if (!Auth::check()) {
+        if (! Auth::check()) {
             return redirect()->route('login');
         }
-        
+
         $user = Auth::user();
-        
-       
-        if(Auth::user()->role === $roles)
-        {
-           return $next($request);
+
+        if (Auth::user()->role === $roles) {
+            return $next($request);
         }
-        
+
         abort(403, 'غير مصرح بالوصول.');
     }
 }

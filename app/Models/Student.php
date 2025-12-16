@@ -40,10 +40,5 @@ class Student extends Model
             ->exists();
     }
 
-    public function acceptedRequest()
-    {
-        return $this->requests()
-            ->where('status', 'accepted')
-            ->first();
-    }
+    
 }

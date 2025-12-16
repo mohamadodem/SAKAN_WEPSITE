@@ -32,7 +32,7 @@
             
             <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
                 <button type="submit" class="btn btn-success" style="flex: 1;">تأكيد القبول</button>
-                <a href="{{ route('admin.request.accept.form', $housingRequest->id) }}" class="btn" style="flex: 1;">العودة لاختيار وحدة</a>
+                <a href="{{ route('admin.show.units', $housingRequest->id) }}" class="btn" style="flex: 1;">العودة لاختيار وحدة</a>
                 <a href="{{ route('admin.dashboard') }}" class="btn btn-danger" style="flex: 1;">إلغاء</a>
             </div>
         </form>
@@ -43,7 +43,7 @@
         </div>
         
         <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
-            <a href="{{ route('admin.request.accept.form', $housingRequest->id) }}" class="btn" style="flex: 1;">العودة واختيار وحدة أخرى</a>
+            <a href="{{ route('admin.show.units', $housingRequest->id) }}" class="btn" style="flex: 1;">العودة واختيار وحدة أخرى</a>
             <a href="{{ route('admin.dashboard') }}" class="btn btn-danger" style="flex: 1;">إلغاء</a>
         </div>
     @endif
