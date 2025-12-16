@@ -11,12 +11,11 @@ return new class extends Migration
         Schema::create('requests', function (Blueprint $table) {
             $table->id();
             $table->foreignId('student_id')->constrained()->onDelete('cascade');
-            $table->foreignId('room_id')->constrained()->onDelete('restrict');
+            $table->foreignId('room_id')->constrained()->onDelete('restrict')->nullable();
             $table->text('description')->nullable();
             $table->enum('status', ['pending','accepted','rejected'])->default('pending');
             $table->timestamps();
             
-            // شرط: طالب واحد فقط له طلب pending أو accepted
         });
     }
 

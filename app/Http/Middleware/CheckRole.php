@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class CheckRole
 {
-    public function handle(Request $request, Closure $next, ...$roles)
+    public function handle(Request $request, Closure $next, $roles)
     {
         if (!Auth::check()) {
             return redirect()->route('login');
@@ -16,10 +16,10 @@ class CheckRole
         
         $user = Auth::user();
         
-        foreach ($roles as $role) {
-            if ($user->role === $role) {
-                return $next($request);
-            }
+       
+        if(Auth::user()->role === $roles)
+        {
+           return $next($request);
         }
         
         abort(403, 'غير مصرح بالوصول.');

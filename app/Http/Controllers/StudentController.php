@@ -13,12 +13,12 @@ class StudentController extends Controller
 {
     public function dashboard()
     {
-        $user    = Auth::user();
+        $user    = Auth::user();/** */
         $student = $user->student;
         $request = null;
 
         if ($student) {
-            $request = $student->requests()->latest()->first();
+            $request = $student->requests()->latest()->first(); /*** */
         }
 
         return view('student.dashboard', compact('student', 'request'));
@@ -38,6 +38,7 @@ class StudentController extends Controller
             'study_year'    => 'required|integer|min:1|max:6',
             'governorate'   => 'required|string|max:100',
             'faculty_id'    => 'required|exists:faculties,id',
+            
         ]);
 
         Student::create([

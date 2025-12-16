@@ -27,7 +27,7 @@
                         <td>{{ $request->created_at->format('Y-m-d') }}</td>
                         <td>
                             <button class="btn btn-view" data-id="{{ $request->id }}">عرض التفاصيل</button>
-                            <a href="{{ route('admin.request.accept.form', $request->id) }}" class="btn btn-success">قبول</a>
+                            <a href="{{ route('admin.show.units', $request->id) }}" class="btn btn-success">قبول</a>
                             <form action="{{ route('admin.request.reject', $request->id) }}" method="POST" style="display: inline;">
                                 @csrf
                                 <button type="submit" class="btn btn-danger" onclick="return confirm('هل أنت متأكد من رفض هذا الطلب؟')">رفض</button>

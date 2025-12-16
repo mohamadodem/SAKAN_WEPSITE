@@ -20,7 +20,7 @@ Route::middleware('guest')->group(function () {
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// الطالب
+// student
 Route::middleware(['auth', 'role:student'])->group(function () {
     Route::get('/student/dashboard', [StudentController::class, 'dashboard'])->name('student.dashboard');
     Route::get('/student/profile/create', [StudentController::class, 'showCreateProfile'])->name('student.profile.create');
@@ -29,14 +29,14 @@ Route::middleware(['auth', 'role:student'])->group(function () {
     Route::post('/student/profile/edit', [StudentController::class, 'updateProfile']);
     Route::get('/student/request/create', [StudentController::class, 'showCreateRequest'])->name('student.request.create');
     Route::post('/student/request/create', [StudentController::class, 'createRequest']);
-    Route::get('/student/requests/history', [StudentController::class, 'requestHistory'])->name('student.requests.history'); // جديد
+     // جديد
 });
 // المدير
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     
     // قبول الطلب - خطوتين
-    Route::get('/admin/request/{id}/accept', [AdminController::class, 'showAcceptUnit'])->name('admin.request.accept.form');
+    Route::get('/admin/request/{id}/accept', [AdminController::class, 'showAcceptUnit'])->name('admin.show.units');
     Route::post('/admin/request/{id}/rooms', [AdminController::class, 'showRoomsForm'])->name('admin.show.rooms');
     Route::post('/admin/request/{id}/accept', [AdminController::class, 'acceptRequest'])->name('admin.request.accept');
     
