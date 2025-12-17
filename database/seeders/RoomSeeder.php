@@ -22,6 +22,5 @@ class RoomSeeder extends Seeder
             }
         }
         
-        $this->command->info('تم إنشاء الغرف بنجاح.');
     }
 }
