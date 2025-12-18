@@ -15,7 +15,7 @@
             <input type="text" id="national_id" name="national_id" value="{{ old('national_id') }}" required autofocus>
             @error('national_id')
                 <div style="color: #e74c3c; font-size: 0.9rem; margin-top: 0.25rem;">
-                    <i class="fas fa-exclamation-circle"></i> {{ $message }}
+                    {{ $message }}
                 </div>
             @enderror
         </div>
@@ -25,7 +25,7 @@
             <input type="password" id="password" name="password" required>
             @error('password')
                 <div style="color: #e74c3c; font-size: 0.9rem; margin-top: 0.25rem;">
-                    <i class="fas fa-exclamation-circle"></i> {{ $message }}
+                     {{ $message }}
                 </div>
             @enderror
         </div>

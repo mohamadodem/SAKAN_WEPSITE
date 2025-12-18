@@ -1,14 +1,14 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\StudentController;
-use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 // الصفحة الرئيسية
 
-   Route::get('/', function () {
+Route::get('/', function () {
 
     if (Auth::check()) {
 
@@ -22,10 +22,7 @@ use Illuminate\Support\Facades\Auth;
     return view('welcome');
 });
 
-
-
-// المصادقة
-Route::middleware('guest')->group(function () {
+    Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
     Route::post('/login', [AuthController::class, 'login']);
     Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
@@ -34,7 +31,7 @@ Route::middleware('guest')->group(function () {
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// student
+// الطالب
 Route::middleware(['auth', 'role:student'])->group(function () {
     Route::get('/student/dashboard', [StudentController::class, 'dashboard'])->name('student.dashboard');
     Route::get('/student/profile/create', [StudentController::class, 'showCreateProfile'])->name('student.profile.create');
@@ -43,17 +40,16 @@ Route::middleware(['auth', 'role:student'])->group(function () {
     Route::post('/student/profile/edit', [StudentController::class, 'updateProfile']);
     Route::get('/student/request/create', [StudentController::class, 'showCreateRequest'])->name('student.request.create');
     Route::post('/student/request/create', [StudentController::class, 'createRequest']);
-     // جديد
+
 });
 // المدير
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-    
-    // قبول الطلب - خطوتين
+    //قبول طلب
     Route::get('/admin/request/{id}/accept', [AdminController::class, 'showAcceptUnit'])->name('admin.show.units');
     Route::post('/admin/request/{id}/rooms', [AdminController::class, 'showRoomsForm'])->name('admin.show.rooms');
     Route::post('/admin/request/{id}/accept', [AdminController::class, 'acceptRequest'])->name('admin.request.accept');
-    
-    // رفض الطلب
+
+    // رفض طلب
     Route::post('/admin/request/{id}/reject', [AdminController::class, 'rejectRequest'])->name('admin.request.reject');
 });
