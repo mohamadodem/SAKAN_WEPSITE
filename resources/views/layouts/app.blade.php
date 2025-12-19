@@ -6,185 +6,219 @@
     <title>نظام السكن الجامعي - @yield('title')</title>
     <style>
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
-        
+
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f5f5f5;
-            color: #333;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
+            color: #333;
+            background-color: #f5f7fa;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
-        
+
+        /* ===== CONTAINER ===== */
         .container {
-            width: 90%;
+            width: 100%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 15px;
+            padding: 0 20px;
         }
-        
+
+        /* ===== HEADER STYLES ===== */
         header {
-            background-color: #2c3e50;
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
             color: white;
-            padding: 1rem 0;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 15px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
-        
+
         .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
         }
-        
+
         .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            padding: 10px 0;
         }
-        
+
+        /* ===== NAVIGATION STYLES ===== */
         nav ul {
-            list-style: none;
             display: flex;
-            gap: 1rem;
+            list-style: none;
+            gap: 25px;
+            margin: 0;
+            padding: 0;
         }
-        
-        nav a {
+
+        nav ul li a {
             color: white;
             text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            transition: background-color 0.3s;
+            font-weight: 500;
+            padding: 10px 15px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            display: block;
+            font-size: 1.1rem;
         }
-        
-        nav a:hover {
-            background-color: #34495e;
+
+        nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
         }
-        
+
+        /* ===== MAIN CONTENT STYLES ===== */
         main {
+            flex: 1;
+            padding: 30px 0;
             min-height: calc(100vh - 140px);
-            padding: 2rem 0;
         }
-        
-        footer {
-            background-color: #2c3e50;
-            color: white;
-            text-align: center;
-            padding: 1rem 0;
-            margin-top: 2rem;
-        }
-        
-        .card {
-            background: white;
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        
-        .btn {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            background-color: #3498db;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            text-decoration: none;
-            font-size: 0.9rem;
-        }
-        
-        .btn:hover {
-            background-color: #2980b9;
-        }
-        
-        .btn-success {
-            background-color: #27ae60;
-        }
-        
-        .btn-success:hover {
-            background-color: #219653;
-        }
-        
-        .btn-danger {
-            background-color: #e74c3c;
-        }
-        
-        .btn-danger:hover {
-            background-color: #c0392b;
-        }
-        
+
+        /* ===== ALERT MESSAGES ===== */
         .alert {
-            padding: 1rem;
-            margin-bottom: 1rem;
-            border-radius: 4px;
+            padding: 15px 20px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            font-weight: 500;
+            border-right: 5px solid;
+            animation: slideIn 0.5s ease;
         }
-        
+
         .alert-success {
             background-color: #d4edda;
             color: #155724;
-            border: 1px solid #c3e6cb;
+            border-right-color: #28a745;
         }
-        
+
         .alert-danger {
             background-color: #f8d7da;
             color: #721c24;
-            border: 1px solid #f5c6cb;
+            border-right-color: #dc3545;
         }
-        
-        .alert-warning {
-            background-color: #fff3cd;
-            color: #856404;
-            border: 1px solid #ffeaa7;
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
-        
-        .form-group {
-            margin-bottom: 1rem;
+
+        /* ===== FOOTER STYLES ===== */
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 25px 0;
+            margin-top: auto;
+            border-top: 4px solid #3498db;
         }
-        
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: bold;
+
+        footer p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin: 0;
         }
-        
-        input, select, textarea {
-            width: 100%;
-            padding: 0.5rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 1rem;
+
+        /* ===== RESPONSIVE DESIGN ===== */
+
+        /* Tablets */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+
+            .logo {
+                font-size: 1.6rem;
+            }
+
+            nav ul {
+                justify-content: center;
+                gap: 15px;
+                flex-wrap: wrap;
+            }
+
+            nav ul li a {
+                padding: 8px 12px;
+                font-size: 1rem;
+            }
+
+            main {
+                padding: 20px 0;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
         }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 1rem;
+
+        /* Mobile Phones */
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.4rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+                width: 100%;
+            }
+
+            nav ul li {
+                width: 100%;
+            }
+
+            nav ul li a {
+                text-align: center;
+                padding: 12px;
+                border: 1px solid rgba(255, 255, 255, 0.2);
+            }
+
+            .alert {
+                padding: 12px 15px;
+                font-size: 0.95rem;
+            }
+
+            footer {
+                padding: 20px 0;
+            }
+
+            footer p {
+                font-size: 1rem;
+            }
         }
-        
-        th, td {
-            padding: 0.75rem;
-            text-align: right;
-            border-bottom: 1px solid #ddd;
-        }
-        
-        th {
-            background-color: #f8f9fa;
-            font-weight: bold;
-        }
-        
-        .request-details {
-            background-color: #f8f9fa;
-            padding: 1rem;
-            border-radius: 4px;
-            margin-top: 1rem;
+
+        /* Large Desktops */
+        @media (min-width: 1200px) {
+            .container {
+                padding: 0;
+            }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container header-content">
-            <div class="logo">نظام السكن الجامعي</div>
+            <header>
+                <div class="container header-content">
+            <div class="logo">الهيئة العامة للمدينة الجامعية</div>
             <nav>
                 <ul>
                     @auth
@@ -193,8 +227,9 @@
                             @csrf
                         </form>
                     @else
-                        <li><a href="{{ route('login') }}">تسجيل الدخول</a></li>
-                        <li><a href="{{ route('register') }}">إنشاء حساب</a></li>
+                    <li><a href="{{ route('welcome') }}">الصفحة الرئيسية</a></li>
+                    <!-- <li><a href="{{ route('login') }}">تسجيل الدخول</a></li>
+                        <li><a href="{{ route('register') }}">إنشاء حساب</a></li> -->
                     @endauth
                 </ul>
             </nav>
@@ -224,7 +259,5 @@
             <p>جميع الحقوق محفوظة &copy; {{ date('Y') }}</p>
         </div>
     </footer>
-    
-    @yield('scripts')
 </body>
 </html>
